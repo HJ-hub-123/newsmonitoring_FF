@@ -6,11 +6,11 @@ import datetime
 # 1. 설정 (이 부분만 확인하세요)
 # ==========================================
 # 지금 당장 테스트하려면 True, 주말에만 작동하게 하려면 False
-TEST_MODE = True 
+TEST_MODE = False
 
 # 검색 키워드 리스트
 KEYWORDS = [
-    "HL그룹", "에이치엘", "HL만도", "HL한라", 
+    "HL그룹", "에이치엘", "HL만도", "한라", 
     "HL클레무브", "HL로보틱스", "묘산봉", "정몽원 회장", "로터스PEF"
 ]
 
@@ -29,10 +29,10 @@ def is_work_time():
     weekday = now.weekday() # 5:토요일, 6:일요일
     hour = now.hour
 
-    if weekday == 5: # 토요일: 아침 8시 ~ 밤 9시
-        return 8 <= hour <= 21
-    elif weekday == 6: # 일요일: 아침 8시 ~ 저녁 7시
-        return 8 <= hour <= 19
+    if weekday == 5: # 토요일: 아침 10시 ~ 밤 9시
+        return 10 <= hour <= 21
+    elif weekday == 6: # 일요일: 아침 7시 ~ 저녁 7시
+        return 7 <= hour <= 19
     return False
 
 def clean_text(text):
@@ -67,8 +67,8 @@ def check_news():
                 now_kst = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
                 diff = (now_kst - pub_date).total_seconds()
                 
-                # 테스트 모드일 때는 최근 24시간 뉴스 발송, 평소에는 1시간 이내 뉴스만 발송
-                time_limit = 86400 if TEST_MODE else 3600
+                # 테스트 모드일 때는 최근 24시간 뉴스 발송, 평소에는 30분 이내 뉴스만 발송
+                time_limit = 86400 if TEST_MODE else 1800
                 
                 if 0 <= diff < time_limit:
                     title = clean_text(item['title'])
