@@ -10,9 +10,7 @@ TELEGRAM_CHAT_ID = os.environ.get('TELEGRAM_CHAT_ID')
 
 # 2. 감시 키워드 리스트
 KEYWORDS = [
-    "HL그룹", "에이치엘", "HL만도", "HL클레무브", 
-    "HL로보틱스", "묘산봉", "정몽원", "로터스 자동차",
-    "한라그룹", "HL홀딩스"
+"홀딩스"
 ]
 
 def is_work_time():
